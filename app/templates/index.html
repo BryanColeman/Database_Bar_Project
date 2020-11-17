@@ -1,11 +1,16 @@
 
+{% extends "base.html" %}
+{% block content %}
 <html>
 <head>
     <link rel= stylesheet href="../static/css/index.css">
 </head>
 <body>
-    <h1> Welcome to DB bar</h1>
-    <button class="button">Login</button>
+    <h1> Welcome to Bar DB</h1>
+    <a href="{{ url_for('login') }}">
+    <button class="button">Bartender Login</button>
+    </a>
     </a>
 </body>
 </html>
+{% endblock %}

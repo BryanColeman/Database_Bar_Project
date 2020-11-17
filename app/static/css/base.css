@@ -1,0 +1,16 @@
+
+div{
+    font-size: 14px; color:white; text-align: center;
+}
+
+a:visited, a:active, a:link{
+    color: white;
+}
+
+a:hover{
+    color: blueviolet;
+}
+
+h2{
+     font-size: 18px; list-style-type: none; text-align: center;
+}

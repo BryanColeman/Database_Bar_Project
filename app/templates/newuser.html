@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+    <head>
+	<link rel ="stylesheet" href="../static/css/newuser.css">
+    </head>
+    <body>
+ 	<h1> Welcome to BarDB</h1>
+    <h2>Register Below</h2>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h3><span style="color: red;">*</span>Required Field</h3>
+        <p>
+            {{ form.bartender_id.label }}
+            {{ form.bartender_id(size=10) }}
+            {% for error in form.bartender_id.errors %}
+            <span style="color: red;">*</span>
+            {% endfor %}
+        </p>
+    <div class="row">
+        <p>
+            {{ form.first_name.label }}
+            {{ form.first_name(size=15) }}
+            {% for error in form.first_name.errors %}
+            <span style="color: red;">*</span>
+            {% endfor %}
+            {{ form.middle_name.label }}
+            {{ form.middle_name(size=15) }}
+            {{ form.last_name.label }}
+            {{ form.last_name(size=15) }}
+            {% for error in form.last_name.errors %}
+            <span style="color: red;">*</span>
+            {% endfor %}
+        </p>
+     </div>
+        <p>{{ form.work_monday() }} {{ form.work_monday.label }}</p>
+        <p>{{ form.work_tuesday() }} {{ form.work_tuesday.label }}</p>
+        <p>{{ form.work_wednesday() }} {{ form.work_wednesday.label }}</p>
+        <p>{{ form.work_thursday() }} {{ form.work_thursday.label }}</p>
+        <p>{{ form.work_friday() }} {{ form.work_friday.label }}</p>
+        <p>{{ form.work_saturday() }} {{ form.work_saturday.label }}</p>
+        <p>{{ form.work_sunday() }} {{ form.work_sunday.label }}</p>
+        <p>{{ form.sub() }}
+        </p>
+    </form>
+    </body>
+{% endblock %}

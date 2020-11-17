@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <head>
+	<link rel ="stylesheet" href="../static/css/login.css">
+    <img src="../static/medicalSymbol.png" alt="Telemedicine Image" width=110px height = 130px align="left">
+    <img src="../static/heart.png" alt="Heart" width="130px" height="130px" align="right">
+    </head>
+    <body>
+ 	<h1> Welcome to the BarDB</h1>
+    </h2>
+    </p>
+	<h3>Please Login</h3>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.bartender_id.label }}
+            {{ form.bartender_id(size=10) }}
+            {% for error in form.bartender_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+        <h4><a href = "{{ url_for('register') }}"> Don't have a bartender account?</a></h4>
+    </form>
+    </body>
+{% endblock %}
