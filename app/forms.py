@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Optional
 
 
 class LoginForm(FlaskForm):
-    bartender_id = StringField('username', validators=[DataRequired()])
+    bartender_id = StringField('Bartender ID', validators=[DataRequired()])
     submit = SubmitField('Sign In')
 
 
@@ -13,13 +13,13 @@ class RegisterForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     middle_name = StringField('Middle Name', validators=[Optional()])
     last_name = StringField('Last Name', validators=[DataRequired()])
-    work_monday = BooleanField('Monday 4-11 PM')
-    work_tuesday = BooleanField('Tuesday 4-11 PM')
-    work_wednesday = BooleanField('Wednesday 4-11 PM')
-    work_thursday = BooleanField('Thursday 4-11 PM')
-    work_friday = BooleanField('Friday 4-12 PM')
-    work_saturday = BooleanField('Saturday 4-12 PM')
-    work_sunday = BooleanField('Sunday 4-9 PM')
+    work_monday = BooleanField('Mon 4-11 PM')
+    work_tuesday = BooleanField('Tue 4-11 PM')
+    work_wednesday = BooleanField('Wed 4-11 PM')
+    work_thursday = BooleanField('Thu 4-11 PM')
+    work_friday = BooleanField('Fri 4-12 PM')
+    work_saturday = BooleanField('Sat 4-12 PM')
+    work_sunday = BooleanField('Sun 4-9 PM')
     wage = IntegerField('Wage', validators=[DataRequired()])
     submit = SubmitField('Register')
 
