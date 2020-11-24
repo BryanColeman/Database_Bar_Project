@@ -1,26 +1,28 @@
 #Rough first attempt, check thoroughly before adding to project
-from django.db import models
+from flask import Flask
+from flask_sqlalchemy import sqlalchemy
 
-class Drink(models.Model):
-    drID = models.CharField(max_length=20)        #Can be set to IntegerField?
-    Brand = models.CharField(max_length=250)
-    Supply = models.IntegerField                  #???
-    Type = models.CharField(max_length=250)
-    Name = models.CharField(max_length=250)
+class Drink(db.Model):
+     drID = db.Column(db.Integer, primary_key = True)
+     Brand = db.Column(db.String(250), nullable=False) 
+     Supply = db.Column(db.Integer, nullable=False)
+     Type = db.Column(db.String(250), nullable=False)
+     Name = db.Column(db.String(250), unique=True, nullable=False)
 
-class Cocktail(models.Model):
-    ckID = models.CharField(max_length=20)      #Can be set to IntegerField?
-    Name = models.CharField(max_length=250)
-    Ratio = models.                             #unclear how it would work, char field offset by spaces? 20 50 30 = 20% ingred1 50% ingred2 30% ingred3?
-    Ingredients = models.ForeignKey(Drink)   #??? Look more into how many -> many relationships work, tutorial suggests using on_delet=models.cascade, but seems to only be essential for one -> many
+class Cocktail(db.Model):
+     ckID = db.Column(db.Integer, primary_key = True)
+     Name = db.Column(db.String(250), unique=True, nullable=False)
+     Ratio = db.Column                      #???
+     Ingredients = db.relationship('Drink', backref='Cocktail', lazy=True)
 
-class Menu_Item(models.Model):
-    mID = models.CharField(max_length=20)       #Can be set to IntegerField?
-    Price = models.DecimalField()               #???
-    Amount_Used = models.IntegerField()         #???
+class Menu_Item(db.Model):
 
-class Employee(models.Model):
-    empID = models.CharField(max_length=20)     #Can be set to IntegerField?
-    Wages = models.DecimalField()   #???
-    Shift = models.DateTimeField()   #???
-    Name = models.CharField(max_length=250)
+     mID = db.Column(db.Integer, primary_key = True)
+     Price = db.Column(db.Integer, nullable=False)
+     Amount_Used = db.Column(db.Integer, nulable=False)
+
+class Employee(db.Model):
+     empID = db.Column(db.Integer, primary_key = True)
+     Wages = db.Column(db.Integer, nullable=False)
+     Shift = db.Column(db.DateTime, nullable=False)
+     Name = db.Column(db.String(250), unique=True, nullable=False)
