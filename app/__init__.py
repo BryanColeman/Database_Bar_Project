@@ -2,6 +2,8 @@ import os
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
 
@@ -12,6 +14,8 @@ app.config.from_object(Config)
 
 app.config['SECRET_KEY'] = 'this_is_a_secret'
 
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 login = LoginManager(app)
 # this will automatically send the user back to the
 # login page if there is no user logined

@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, IntegerField
-from wtforms.validators import DataRequired, Optional
+from wtforms.validators import DataRequired, Optional, ValidationError
+
+from app.models import Employee
 
 
 class LoginForm(FlaskForm):
@@ -9,7 +11,7 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    bartender_id = StringField('Bartender ID', validators=[DataRequired()])
+    bartender_id = IntegerField('Bartender ID', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
     middle_name = StringField('Middle Name', validators=[Optional()])
     last_name = StringField('Last Name', validators=[DataRequired()])
@@ -23,4 +25,7 @@ class RegisterForm(FlaskForm):
     wage = IntegerField('Wage', validators=[DataRequired()])
     submit = SubmitField('Register')
 
-    #validate bartender_id
+    def validate_bartender_id(self, empID):
+        employee = Employee.query.filter_by(bartender_id=empID.data).first()
+        if employee is not None:
+            raise ValidationError('Bartender ID already taken')

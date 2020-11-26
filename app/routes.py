@@ -1,9 +1,10 @@
-from flask import render_template, url_for
-from flask_login import current_user, logout_user
+from flask import render_template, url_for, flash
+from flask_login import current_user, logout_user, login_user
 from werkzeug.utils import redirect
 
-from app import app
+from app import app, db
 from app.forms import LoginForm, RegisterForm
+from app.models import Employee
 
 
 @app.route('/')
@@ -15,15 +16,15 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('portal', username=current_user.username))
+        return redirect(url_for('menu', empId=current_user.empID))
     form = LoginForm()
     if form.validate_on_submit():
-        print("temp")
-        # query db for user
-        # if user is None:
-        # flash invalid redirect to login or index
-    # login_user(user,true)
-    # return redirect(url_for('portal', username=current_user.username))
+        employee = Employee.query.filter_by(empID=form.bartender_id.data).first()
+        if employee is None:
+            flash('invalid employee ID')
+            return redirect(url_for('login'))
+        login_user(employee, True)
+        return redirect(url_for('menu'))
     return render_template('login.html', title='sign on', form=form)
 
 
@@ -47,9 +48,30 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('patientportal'))
+        return redirect(url_for('menu'))
     form = RegisterForm()
-    #add user to db
     if form.validate_on_submit():
-        print('temp')
+        work_days = ""
+        if form.work_monday.data:
+            work_days = 'monday,'
+        if form.work_tuesday.data:
+            work_days = 'tuesday,'
+        if form.work_wednesday.data:
+            work_days = 'wednesday,'
+        if form.work_thursday.data:
+            work_days = 'thursday,'
+        if form.work_friday.data:
+            work_days = 'friday,'
+        if form.work_saturday.data:
+            work_days = 'saturday,'
+        if form.work_sunday.data:
+            work_days = 'sunday,'
+        employee = Employee(empID=form.bartender_id.data,
+                            Wages=6,
+                            Shift=work_days,
+                            Name=form.first_name.data + " " + form.middle_name.data + " " + form.last_name.data)
+        db.session.add(employee)
+        db.session.commit()
+        flash('You are now registered!')
+        return redirect(url_for('login'))
     return render_template('newuser.html', title='register', form=form)
