@@ -4,7 +4,7 @@ from werkzeug.utils import redirect
 
 from app import app, db
 from app.forms import LoginForm, RegisterForm
-from app.models import Employee
+from app.models import Employee, Drink
 
 
 @app.route('/')
@@ -30,13 +30,55 @@ def login():
 
 @app.route('/stock', methods=['GET', 'POST'])
 def stock():
-    #query the db to load data to web page
-    return render_template('stock.html', title='bar stock')
+    beerDict = dict
+    rumDict = dict
+    vodkaDict = dict
+    bourbonDict = dict
+    ryeDict = dict
+    scotchDict = dict
+    ginDict = dict
+    supply = Drink.query.all()
+
+    for s in supply:
+        if s.Type == 'beer':
+            beerDict[s.Brand] = s.Supply
+        if s.Type == 'rum':
+            rumDict[s.Brand] = s.Supply
+        if s.Type == 'vodka':
+            vodkaDict[s.Brand] = s.Supply
+        if s.Type == 'bourbon':
+            bourbonDict[s.Brand] = s.Supply
+        if s.Type == 'rye':
+            ryeDict[s.Brand] = s.Supply
+        if s.Type == 'scotch':
+            scotchDict[s.Brand] = s.Supply
+        if s.Type == 'gin':
+            ginDict[s.Brand] = s.Supply
+
+    return render_template('stock.html', title='bar stock',
+                           beerDict=beerDict, rumDict=rumDict, vodkaDict=vodkaDict,
+                           bourbonDict=bourbonDict, ryeDict=ryeDict, scotchDict=scotchDict,
+                           ginDict=ginDict)
+
+
+@app.route('/drink_menu', methods=['GET', 'POST'])
+def drink_menu():
+    return render_template('drink_menu.html', title='bar drink menu')
+
+
+@app.route('/beer_menu', methods=['GET', 'POST'])
+def beer_menu():
+    return render_template('beer_menu.html', title='beer menu')
+
+
+@app.route('/cocktail_menu', methods=['GET', 'POST'])
+def cocktail_menu():
+    return render_template('cocktail_menu.html', title='cocktail menu')
 
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu.html', title='bar menu')
+    return render_template('menu', title='bar selection menu')
 
 
 @app.route('/logout')

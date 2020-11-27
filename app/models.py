@@ -10,7 +10,7 @@ class Drink(UserMixin, db.Model):
     Brand = db.Column(db.String(250), nullable=False)
     Supply = db.Column(db.Integer, nullable=False)
     Type = db.Column(db.String(250), nullable=False)
-    Name = db.Column(db.String(250), unique=True, nullable=False)
+    Name = db.Column(db.String(250), unique=True, nullable=True)
 
 
 class Cocktail(UserMixin, db.Model):
@@ -23,7 +23,7 @@ class Cocktail(UserMixin, db.Model):
 class MenuItem(UserMixin, db.Model):
     mID = db.Column(db.Integer, primary_key=True)
     Price = db.Column(db.Integer, nullable=False)
-    Amount_Used = db.Column(db.Integer, nullable=False)
+    Amount_Used = db.Column(db.Integer, nullable=True)
 
 
 class Employee(UserMixin, db.Model):
