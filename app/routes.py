@@ -16,14 +16,14 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('menu', empId=current_user.empID))
+        return redirect(url_for('menu', id=current_user.id))
     form = LoginForm()
     if form.validate_on_submit():
-        employee = Employee.query.filter_by(empID=form.bartender_id.data).first()
+        employee = Employee.query.filter_by(id=form.bartender_id.data).first()
         if employee is None:
             flash('invalid employee ID')
             return redirect(url_for('login'))
-        login_user(employee, True)
+        login_user(employee)
         return redirect(url_for('menu'))
     return render_template('login.html', title='sign on', form=form)
 
@@ -66,19 +66,9 @@ def drink_menu():
     return render_template('drink_menu.html', title='bar drink menu')
 
 
-@app.route('/beer_menu', methods=['GET', 'POST'])
-def beer_menu():
-    return render_template('beer_menu.html', title='beer menu')
-
-
-@app.route('/cocktail_menu', methods=['GET', 'POST'])
-def cocktail_menu():
-    return render_template('cocktail_menu.html', title='cocktail menu')
-
-
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu', title='bar selection menu')
+    return render_template('menu.html', title='bar selection menu')
 
 
 @app.route('/logout')
@@ -93,6 +83,9 @@ def register():
         return redirect(url_for('menu'))
     form = RegisterForm()
     if form.validate_on_submit():
+        print("here")
+    if form.validate_on_submit():
+        print("nohere")
         work_days = ""
         if form.work_monday.data:
             work_days = 'monday,'
@@ -108,7 +101,7 @@ def register():
             work_days = 'saturday,'
         if form.work_sunday.data:
             work_days = 'sunday,'
-        employee = Employee(empID=form.bartender_id.data,
+        employee = Employee(id=form.bartender_id.data,
                             Wages=6,
                             Shift=work_days,
                             Name=form.first_name.data + " " + form.middle_name.data + " " + form.last_name.data)

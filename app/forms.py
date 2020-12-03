@@ -22,10 +22,5 @@ class RegisterForm(FlaskForm):
     work_friday = BooleanField('Fri 4-12 PM')
     work_saturday = BooleanField('Sat 4-12 PM')
     work_sunday = BooleanField('Sun 4-9 PM')
-    wage = IntegerField('Wage', validators=[DataRequired()])
     submit = SubmitField('Register')
 
-    def validate_bartender_id(self, empID):
-        employee = Employee.query.filter_by(bartender_id=empID.data).first()
-        if employee is not None:
-            raise ValidationError('Bartender ID already taken')
