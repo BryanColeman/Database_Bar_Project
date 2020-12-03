@@ -35,4 +35,4 @@ class Employee(UserMixin, db.Model):
 
 @login.user_loader
 def load_user(id):
-    return Employee.query.get(int(id))
+    return Employee.query.get(int(empid))
