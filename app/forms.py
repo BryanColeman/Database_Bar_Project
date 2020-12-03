@@ -24,3 +24,18 @@ class RegisterForm(FlaskForm):
     work_sunday = BooleanField('Sun 4-9 PM')
     submit = SubmitField('Register')
 
+
+class DrinkButtonForm(FlaskForm):
+    budlight_bottle = SubmitField('Bud Light')
+    yuengling_bottle = SubmitField('Yuengling')
+    budweiser_bottle = SubmitField('Budweiser')
+    guinness_bottle = SubmitField('Guinness')
+    dos_equis_bottle = SubmitField('Dos Equis')
+    shiner_bock_bottle = SubmitField('Shiner Bock')
+    lagavulin_16_neat = SubmitField('Lagavulin 16 Neat')
+    old_fashioned = SubmitField('Old Fashioned')
+    manhattan = SubmitField('Manhattan')
+    martini = SubmitField('Martini')
+    daiquiri = SubmitField('Daiquiri')
+    black_russian = SubmitField('Black Russian')
+    finished = SubmitField('Back')
