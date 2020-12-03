@@ -18,16 +18,16 @@ class Cocktail(UserMixin, db.Model):
     Name = db.Column(db.String(250), unique=True, nullable=False)
     Ratio = db.Column(db.String(250), nullable=False)
     Ingredients = db.Column(db.String(250), nullable=False)
+    Price = db.Column(db.Integer, nullable=False)
 
 
 class MenuItem(UserMixin, db.Model):
     mID = db.Column(db.Integer, primary_key=True)
     Price = db.Column(db.Integer, nullable=False)
-    Amount_Used = db.Column(db.Integer, nullable=True)
 
 
 class Employee(UserMixin, db.Model):
-    empID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     Wages = db.Column(db.Integer, nullable=False)
     Shift = db.Column(db.String(250), nullable=False)
     Name = db.Column(db.String(250), unique=True, nullable=False)

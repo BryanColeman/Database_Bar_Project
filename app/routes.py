@@ -16,14 +16,14 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('menu', empId=current_user.empID))
+        return redirect(url_for('menu', id=current_user.id))
     form = LoginForm()
     if form.validate_on_submit():
-        employee = Employee.query.filter_by(empID=form.bartender_id.data).first()
+        employee = Employee.query.filter_by(id=form.bartender_id.data).first()
         if employee is None:
             flash('invalid employee ID')
             return redirect(url_for('login'))
-        login_user(employee, True)
+        login_user(employee)
         return redirect(url_for('menu'))
     return render_template('login.html', title='sign on', form=form)
 
@@ -41,19 +41,19 @@ def stock():
 
     for s in supply:
         if s.Type == 'beer':
-            beerDict[s.Brand] = s.Supply
+            beerDict[s.Name] = s.Supply
         if s.Type == 'rum':
-            rumDict[s.Brand] = s.Supply
+            rumDict[s.Name] = s.Supply
         if s.Type == 'vodka':
-            vodkaDict[s.Brand] = s.Supply
+            vodkaDict[s.Name] = s.Supply
         if s.Type == 'bourbon':
-            bourbonDict[s.Brand] = s.Supply
+            bourbonDict[s.Name] = s.Supply
         if s.Type == 'rye':
-            ryeDict[s.Brand] = s.Supply
+            ryeDict[s.Name] = s.Supply
         if s.Type == 'scotch':
-            scotchDict[s.Brand] = s.Supply
+            scotchDict[s.Name] = s.Supply
         if s.Type == 'gin':
-            ginDict[s.Brand] = s.Supply
+            ginDict[s.Name] = s.Supply
 
     return render_template('stock.html', title='bar stock',
                            beerDict=beerDict, rumDict=rumDict, vodkaDict=vodkaDict,
@@ -66,19 +66,9 @@ def drink_menu():
     return render_template('drink_menu.html', title='bar drink menu')
 
 
-@app.route('/beer_menu', methods=['GET', 'POST'])
-def beer_menu():
-    return render_template('beer_menu.html', title='beer menu')
-
-
-@app.route('/cocktail_menu', methods=['GET', 'POST'])
-def cocktail_menu():
-    return render_template('cocktail_menu.html', title='cocktail menu')
-
-
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu', title='bar selection menu')
+    return render_template('menu.html', title='bar selection menu')
 
 
 @app.route('/logout')
@@ -108,7 +98,7 @@ def register():
             work_days = 'saturday,'
         if form.work_sunday.data:
             work_days = 'sunday,'
-        employee = Employee(empID=form.bartender_id.data,
+        employee = Employee(id=form.bartender_id.data,
                             Wages=6,
                             Shift=work_days,
                             Name=form.first_name.data + " " + form.middle_name.data + " " + form.last_name.data)

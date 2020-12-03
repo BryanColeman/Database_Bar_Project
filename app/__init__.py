@@ -23,3 +23,4 @@ login = LoginManager(app)
 login.login_view = 'index'
 
 from app import models, routes
+from app import seed
