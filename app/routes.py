@@ -41,19 +41,19 @@ def stock():
 
     for s in supply:
         if s.Type == 'beer':
-            beerDict[s.Brand] = s.Supply
+            beerDict[s.Name] = s.Supply
         if s.Type == 'rum':
-            rumDict[s.Brand] = s.Supply
+            rumDict[s.Name] = s.Supply
         if s.Type == 'vodka':
-            vodkaDict[s.Brand] = s.Supply
+            vodkaDict[s.Name] = s.Supply
         if s.Type == 'bourbon':
-            bourbonDict[s.Brand] = s.Supply
+            bourbonDict[s.Name] = s.Supply
         if s.Type == 'rye':
-            ryeDict[s.Brand] = s.Supply
+            ryeDict[s.Name] = s.Supply
         if s.Type == 'scotch':
-            scotchDict[s.Brand] = s.Supply
+            scotchDict[s.Name] = s.Supply
         if s.Type == 'gin':
-            ginDict[s.Brand] = s.Supply
+            ginDict[s.Name] = s.Supply
 
     return render_template('stock.html', title='bar stock',
                            beerDict=beerDict, rumDict=rumDict, vodkaDict=vodkaDict,
@@ -83,9 +83,6 @@ def register():
         return redirect(url_for('menu'))
     form = RegisterForm()
     if form.validate_on_submit():
-        print("here")
-    if form.validate_on_submit():
-        print("nohere")
         work_days = ""
         if form.work_monday.data:
             work_days = 'monday,'
