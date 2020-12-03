@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1> The BarDB Menu</h1>
-<form action="" method="post" novalidate>
+<form method="post">
+    {{ form.hidden_tag() }}
     <p>{{ form.budlight_bottle() }} </p>
     {% for error in form.budlight_bottle.errors %}
     <span style="color: red;">*</span>
@@ -16,7 +17,7 @@
     <span style="color: red;">*</span>
     {% endfor %}
     <p>{{ form.budweiser_bottle() }} </p>
-    {% for error in form.budweiser.errors %}
+    {% for error in form.budweiser_bottle.errors %}
     <span style="color: red;">*</span>
     {% endfor %}
     <p>{{ form.guinness_bottle() }} </p>
@@ -32,7 +33,7 @@
     <span style="color: red;">*</span>
     {% endfor %}
     <p>{{ form.lagavulin_16_neat() }} </p>
-    {% for error in form.lagavulin_16_near.errors %}
+    {% for error in form.lagavulin_16_neat.errors %}
     <span style="color: red;">*</span>
     {% endfor %}
     <p>{{ form.old_fashioned() }} </p>
@@ -59,3 +60,5 @@
 </form>
 </body>
 </html>
+
+{% endblock %}

@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>
+        <a href="{{ url_for('drink_menu') }}">
         <button class="button"> Drink Menu</button>
+            <a href="{{ url_for('stock') }}">
         <button class="button"> Stock </button>
     </h1>
 </body>
+{% endblock %}
