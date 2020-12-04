@@ -1,10 +1,10 @@
-from flask import render_template, url_for, flash
+from flask import render_template, url_for, flash, request
 from flask_login import current_user, logout_user, login_user
 from werkzeug.utils import redirect
 
 from app import app, db
-from app.forms import LoginForm, RegisterForm
-from app.models import Employee, Drink
+from app.forms import LoginForm, RegisterForm, DrinkButtonForm
+from app.models import Employee, Drink, Cocktail
 
 
 @app.route('/')
@@ -63,7 +63,144 @@ def stock():
 
 @app.route('/drink_menu', methods=['GET', 'POST'])
 def drink_menu():
-    return render_template('drink_menu.html', title='bar drink menu')
+    form = DrinkButtonForm()
+    if request.method == 'POST':
+        if form.budlight_bottle.data:
+            drink = Drink.query.filter_by(drID=1).first()
+            cocktail = Cocktail.query.filter_by(ckID=1).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.yuengling_bottle.data:
+            drink = Drink.query.filter_by(drID=2).first()
+            cocktail = Cocktail.query.filter_by(ckID=2).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.budweiser_bottle.data:
+            drink = Drink.query.filter_by(drID=3).first()
+            cocktail = Cocktail.query.filter_by(ckID=3).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.guinness_bottle.data:
+            drink = Drink.query.filter_by(drID=4).first()
+            cocktail = Cocktail.query.filter_by(ckID=4).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.dos_equis_bottle.data:
+            drink = Drink.query.filter_by(drID=5).first()
+            cocktail = Cocktail.query.filter_by(ckID=5).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.shiner_bock_bottle.data:
+            drink = Drink.query.filter_by(drID=6).first()
+            cocktail = Cocktail.query.filter_by(ckID=6).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.lagavulin_16_neat.data:
+            drink = Drink.query.filter_by(drID=7).first()
+            cocktail = Cocktail.query.filter_by(ckID=7).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.old_fashioned.data:
+            drink = Drink.query.filter_by(drID=8).first()
+            cocktail = Cocktail.query.filter_by(ckID=8).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.manhattan.data:
+            drink = Drink.query.filter_by(drID=9).first()
+            cocktail = Cocktail.query.filter_by(ckID=9).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.martini.data:
+            drink = Drink.query.filter_by(drID=10).first()
+            cocktail = Cocktail.query.filter_by(ckID=10).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.daiquiri.data:
+            drink = Drink.query.filter_by(drID=11).first()
+            cocktail = Cocktail.query.filter_by(ckID=11).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.black_russian.data:
+            drink = Drink.query.filter_by(drID=12).first()
+            cocktail = Cocktail.query.filter_by(ckID=12).first()
+            if drink.Supply <= 0:
+                flash(f'There is not a big enough supply of {drink.Name}')
+            else:
+                ratio = cocktail.Ratio.split(',')
+                drink.Supply -= int(ratio[0])
+                db.session.commit()
+                flash(f'One {cocktail.Name} served')
+
+        if form.finished.data:
+            return redirect(url_for('menu'))
+
+    return render_template('drink_menu.html', title='bar drink menu', form=form)
 
 
 @app.route('/menu', methods=['GET', 'POST'])

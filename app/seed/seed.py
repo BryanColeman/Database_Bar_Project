@@ -132,49 +132,49 @@ if __name__ == '__main__':
     dos_equis_bottle = Cocktail(ckID=5,
                                 Name='Dos Equis',
                                 Ratio="12",
-                                Ingredients="dos_equis",
+                                Ingredients="dos equis",
                                 Price=5
                                 )
 
     shiner_bock_bottle = Cocktail(ckID=6,
                                   Name='Shiner Bock',
                                   Ratio="12",
-                                  Ingredients="shiner_bock",
+                                  Ingredients="shiner bock",
                                   Price=5
                                   )
 
     lagavulin_16_neat = Cocktail(ckID=7,
                                  Name='Lagavulin 16 Neat',
                                  Ratio="2",
-                                 Ingredients="lagavulin_16",
+                                 Ingredients="lagavulin 16",
                                  Price=15
                                  )
 
     old_fashioned = Cocktail(ckID=8,
                              Name='Old Fashioned',
                              Ratio="2,0.25,0.05",
-                             Ingredients="woodford_reserve,simple,angostura",
+                             Ingredients="woodford reserve,simple,angostura",
                              Price=12
                              )
 
     manhattan = Cocktail(ckID=9,
                          Name='Manhattan',
                          Ratio="2,1,0.05",
-                         Ingredients="michters_rye,sweet_vermouth,angostura",
+                         Ingredients="michters rye,sweet_vermouth,angostura",
                          Price=12
                          )
 
     martini = Cocktail(ckID=10,
                        Name='Martini',
                        Ratio="2,1,0.05",
-                       Ingredients="bombay_sapphire,dry_vermouth,orange_bitters",
+                       Ingredients="bombay sapphire,dry_vermouth,orange_bitters",
                        Price=11
                        )
 
     daiquiri = Cocktail(ckID=11,
                         Name='Daiquiri',
                         Ratio="2,.75,.75",
-                        Ingredients="havana_club,simple,lime_juice",
+                        Ingredients="havana club,simple,lime_juice",
                         Price=10
                         )
 
