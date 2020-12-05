@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+<!-- delete window -->
+{% extends "menu.html" %}
 {% block content %}
     <head>
 	<link rel ="stylesheet" href="../static/css/login.css">
@@ -7,7 +8,7 @@
  	<h1> Welcome to the BarDB</h1>
     </h2>
     </p>
-	<h3>Please Login</h3>
+	<h3>Please Enter the BarID</h3>
     <h4><form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -18,7 +19,7 @@
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
-        <a href = "{{ url_for('register') }}"> Don't have a bartender account?</a></form>
     </h4>
+    </form>
     </body>
 {% endblock %}
