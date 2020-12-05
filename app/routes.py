@@ -30,35 +30,54 @@ def login():
 
 @app.route('/stock', methods=['GET', 'POST'])
 def stock():
-    beerDict = dict
-    rumDict = dict
-    vodkaDict = dict
-    bourbonDict = dict
-    ryeDict = dict
-    scotchDict = dict
-    ginDict = dict
+    beerDict = {}
+    rumDict = {}
+    vodkaDict = {}
+    bourbonDict = {}
+    ryeDict = {}
+    scotchDict = {}
+    ginDict = {}
     supply = Drink.query.all()
 
+    totalbeersupply = 0
     for s in supply:
-        if s.Type == 'beer':
+        print(s.Name)
+        if s.Name == 'BudLight':
             beerDict[s.Name] = s.Supply
-        if s.Type == 'rum':
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Yuengling':
+            beerDict[s.Name] = s.Supply
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Budweiser':
+            beerDict[s.Name] = s.Supply
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Guinness':
+            beerDict[s.Name] = s.Supply
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Dos Equis':
+            beerDict[s.Name] = s.Supply
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Shiner Bock':
+            beerDict[s.Name] = s.Supply
+            totalbeersupply = totalbeersupply + s.Supply
+        if s.Name == 'Havana Club':
             rumDict[s.Name] = s.Supply
-        if s.Type == 'vodka':
+        if s.Name == 'Titos':
             vodkaDict[s.Name] = s.Supply
-        if s.Type == 'bourbon':
+        if s.Name == 'Woodford Reserve':
             bourbonDict[s.Name] = s.Supply
-        if s.Type == 'rye':
+        if s.Name == 'Mitchers Rye':
             ryeDict[s.Name] = s.Supply
-        if s.Type == 'scotch':
+        if s.Name == 'Laugavulin 16':
             scotchDict[s.Name] = s.Supply
-        if s.Type == 'gin':
+        if s.Name == 'Bombay Sapphire':
             ginDict[s.Name] = s.Supply
+        print(beerDict)
 
     return render_template('stock.html', title='bar stock',
                            beerDict=beerDict, rumDict=rumDict, vodkaDict=vodkaDict,
                            bourbonDict=bourbonDict, ryeDict=ryeDict, scotchDict=scotchDict,
-                           ginDict=ginDict)
+                           ginDict=ginDict, totalbeersupply=totalbeersupply)
 
 
 @app.route('/drink_menu', methods=['GET', 'POST'])
