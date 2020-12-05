@@ -3,7 +3,7 @@ from flask_login import current_user, logout_user, login_user
 from werkzeug.utils import redirect
 
 from app import app, db
-from app.forms import LoginForm, RegisterForm, DrinkButtonForm
+from app.forms import LoginForm, RegisterForm, DrinkButtonForm, DeleteForm
 from app.models import Employee, Drink, Cocktail
 
 
@@ -26,6 +26,15 @@ def login():
         login_user(employee)
         return redirect(url_for('menu'))
     return render_template('login.html', title='sign on', form=form)
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    form = DeleteForm()
+    if form.validate_on_submit():
+        Employee.query.filter_by(id=form.bartender_id.data).delete()
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('delete.html', form=form)
 
 
 @app.route('/stock', methods=['GET', 'POST'])

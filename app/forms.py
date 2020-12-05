@@ -5,6 +5,11 @@ from wtforms.validators import DataRequired, Optional, ValidationError
 from app.models import Employee
 
 
+class DeleteForm(FlaskForm):
+    bartender_id = StringField('Bartender ID', validators=[DataRequired()])
+    submit = SubmitField('Delete')
+
+
 class LoginForm(FlaskForm):
     bartender_id = StringField('Bartender ID', validators=[DataRequired()])
     submit = SubmitField('Sign In')
